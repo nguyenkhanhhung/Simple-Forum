@@ -1,0 +1,21 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+<h3>Listing users</h3>
+<table width="100%">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Location</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.username %></td>
+    <td><%= user.location %></td>
+    <td><%= user.email %></td>
+  </tr>
+<% end %>
+</table>

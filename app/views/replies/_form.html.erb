@@ -1,0 +1,27 @@
+<%= form_for(@reply, @topic.replies.new, :url => topic_replies_path(:topic_id => @topic)) do |f| %>
+  <% if @reply.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+
+      <ul>
+      <% @reply.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset style="width:500px">
+    <legend>New Reply</legend>    
+    <div>
+      <label for="title">Title:</label>
+      <%= f.text_field :title, :value => "Re: #{@topic.title}", :readonly => 'true' %>
+    </div>
+    <div>
+      <label for="content">Content:</label>
+      <%= f.text_area :content, :size => "50x12"  %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
+<% end %>

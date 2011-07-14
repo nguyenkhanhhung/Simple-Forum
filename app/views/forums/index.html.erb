@@ -1,0 +1,48 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+<%= link_to 'New Forum', new_forum_path %>
+<br/><br/>
+<table width="100%">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Forum</th>
+      <th>Last Reply</th>
+      <th>Topics</th>
+      <th>Replies</th>
+    </tr>
+     <tr><th colspan="5">General</th></tr>
+  </thead> 
+<% @forums.each do |forum| %>
+  <tr>
+    <td>&nbsp;</td>
+    <td><%= link_to forum.name, "/forums/#{forum.id}/topics" %></td>
+    <% if @last_replies[forum.id] != nil %>
+      <td>
+          <%=  @last_replies[forum.id]['title'] %>
+          <br />
+          by <%= @last_replies[forum.id]['username']%>
+          <br />
+          <%= @last_replies[forum.id]['created_at'] %>
+      </td>
+    <% else %>
+      <td>No Reply</td>
+    <% end %>
+
+    <% if @total_topics[forum.id] != 0 %>
+      <td><%= @total_topics[forum.id] %></td>
+    <% else %>
+      <td>No Topic</td>
+    <% end %>
+    
+    <% if @total_replies[forum.id] != 0 %>
+      <td><%= @total_replies[forum.id] %></td>
+    <% else %>
+      <td>No Reply</td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<br />
+

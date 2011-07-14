@@ -1,0 +1,30 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+<%= link_to 'Forum', forums_url %> >> <%= @forum.name %>
+<br /><br />
+<%= link_to 'New Topic',  new_forum_topic_url %>
+<br />
+<table width="100%">
+  <thead>
+    <tr>
+      <td colspan="5">Thread in Forum: <%= @forum.name %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Topic</th>
+      <th>Last Reply</th>
+      <th>Replies</th>
+      <th>View</th>
+    </tr>
+  </thead>
+<% @topics.each do |topic| %>
+  <tr>
+    <td></td>
+    <td><%= link_to topic.title, "/topics/#{topic.id}/replies" %></td>
+    <td><%= @last_replies[topic.id]['created_at'] if @last_replies[topic.id]!= nil %></td>
+    <td><%= @total_replies[topic.id] != 0 ? @total_replies[topic.id] : "No Reply" %></td>
+    <td><%= topic.view != 0 ? topic.view : "No View" %></td>
+  </tr>
+<% end %>
+</table>

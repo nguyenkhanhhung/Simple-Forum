@@ -1,0 +1,58 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+Forum >> <%= link_to @forum.name, "/forums/#{@topic.forum_id}/topics" %> >> <%= @topic.title %>
+<br/><br/>
+<%= link_to 'New Reply', new_topic_reply_url %>
+<br />
+<% i= 1 %>
+<table width="100%">
+  <tr>
+    <td width="80%"><%= @topic.created_at %></td>
+    <td width="20%">#<%= i %></td>
+  </tr>
+  <tr>
+    <td><%= @topic.username %></td>
+    <td>
+      Join Date: <%= @topic.created_at %>
+      <br/>
+      Location: <%= @topic.location %>
+      <br/>
+      Posts: <%= @users_and_total_posts[@topic.user_id].posts_count if @users_and_total_posts[@topic.user_id] != nil %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= @topic.title %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= @topic.content %></td>
+  </tr>
+</table>
+<% i= 2 %>
+<br />
+<% @replies.each do |reply| %>
+<table width="100%">
+  <tr>
+    <td width="80%"><%= reply.created_at %></td>
+    <td width="20%">#<%= i %></td>
+  </tr>
+  <tr>
+    <td><%= reply.user.username %></td>
+    <td>
+      Join Date: <%= reply.user.created_at %>
+      <br/>
+      Location: <%= reply.user.location %>
+      <br/>
+      Posts: <%= @users_and_total_posts[reply.user_id].posts_count %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= reply.title %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= reply.content %></td>
+  </tr>
+</table>
+<br/>
+<% i += 1 %>
+<% end %>
